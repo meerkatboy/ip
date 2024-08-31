@@ -5,9 +5,6 @@ public class Ui {
                 Hello! I'm a meerkat
                 What can I do for you?
                 """;
-    private static String bye = """
-                Goodnight, sleep tight, Hope I don't ever see you again!
-                """;
 
     public void printList(TaskList taskList) {
         System.out.println(lines);
@@ -39,7 +36,7 @@ public class Ui {
     }
 
     public void printNeedMoreInfoDeadlineMessage() {
-        System.out.println(lines + "\nbruh. i need more info to create your deadline task.\n" + lines);
+        System.out.println(lines + "\ncan don't dumb? deadline needs to be in 'yyyy-MM-dd kk:mm' format, k means 24 hr clock\n" + lines);
     }
 
     public void printNeedMoreInfoEventMessage() {
@@ -51,7 +48,7 @@ public class Ui {
     }
 
     public void printGoodbyeMessage() {
-        System.out.println(lines + "\n" + bye + lines);
+        System.out.println(lines + "\n" + "why are you leaving so soon!" + lines);
     }
 
     public void printTaskNonUnmarkableMessage() {

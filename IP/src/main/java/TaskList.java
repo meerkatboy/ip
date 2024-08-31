@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +35,8 @@ public class TaskList {
         ui.printTaskCreationMessage(thisTask, this);
     }
 
-    public void createDeadlineTask(String name, String duedate) throws IOException {
-        Task thisTask = new Deadline(name, duedate);
+    public void createDeadlineTask(String name, LocalDateTime deadlineTime) throws IOException {
+        Task thisTask = new Deadline(name, deadlineTime);
         listOfTasks.add(thisTask);
         storage.writeToFile(STORAGEFILEPATH, taskListToString(listOfTasks));
         ui.printTaskCreationMessage(thisTask, this);

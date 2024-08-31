@@ -1,11 +1,15 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 
 public class Parser {
 
     private static TaskList taskList;
     private static Ui ui;
     private final String STORAGEFILEPATH = "Meerkat.txt";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
 
 
     public Parser() {
@@ -31,7 +35,7 @@ public class Parser {
                 break;
             case 4:
                 try {
-                    taskList.createDeadlineTask(strArray[2], strArray[3]);
+                    taskList.createDeadlineTask(strArray[2], LocalDateTime.parse(strArray[3], FORMATTER));
                     switch (strArray[1]) {
                         case "m":
                             taskList.setMostRecentTaskCompletionStatus(true);
@@ -61,7 +65,6 @@ public class Parser {
     public void parse(String taskName) {
         String[] strArray = taskName.split(" ", 2);
 
-
         // create new todo task
         if (strArray[0].equalsIgnoreCase("todo")) {
             try {
@@ -77,9 +80,10 @@ public class Parser {
         else if (strArray[0].equalsIgnoreCase("deadline")) {
             try {
                 String[] todoStringArray = taskName.split(" /by ");
-                String dueDate = todoStringArray[1];
                 String name = todoStringArray[0].split(" ", 2)[1];
-                taskList.createDeadlineTask(name, dueDate);
+                String deadline = todoStringArray[1];
+                LocalDateTime deadLineTime = LocalDateTime.parse(deadline, FORMATTER);
+                taskList.createDeadlineTask(name, deadLineTime);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.printNeedMoreInfoDeadlineMessage();
             } catch (IOException e) {

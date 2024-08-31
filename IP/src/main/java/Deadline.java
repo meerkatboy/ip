@@ -1,12 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String duedate;
-    public Deadline(String name, String duedate) {
+    private LocalDateTime deadlineTime;
+    public Deadline(String name, LocalDateTime deadlineTime) {
         super(name);
-        this.duedate = duedate;
+        this.deadlineTime = deadlineTime;
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.duedate + ")";
+        String newFormat = this.deadlineTime.format(DateTimeFormatter.ofPattern("MMM d yyyy K:mma"));
+        return "[D]" + super.toString() + " (by: " + newFormat + ")";
     }
 
     @Override
@@ -18,7 +22,7 @@ public class Deadline extends Task {
         else {
             s += "u,";
         }
-        s += this.getName() + "," + this.duedate;
+        s += this.getName() + "," + this.deadlineTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm"));
         return s;
     }
 }
