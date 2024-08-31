@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+package meerkatpack;
 import java.io.IOException;
 
 public class Parser {
